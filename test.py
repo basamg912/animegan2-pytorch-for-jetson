@@ -8,7 +8,7 @@ import torch
 from torchvision.transforms.functional import to_tensor, to_pil_image
 
 from model import Generator
-
+import tensorrt as trt
 
 torch.backends.cudnn.enabled = False
 torch.backends.cudnn.benchmark = False
@@ -28,12 +28,20 @@ def load_image(image_path, x32=False):
 
 
 def test(args):
+    TRT_Logger = trt.Logger(trt.Logger.Warning) # runtime instance
+    runtime = trt.Runtime(TRT_Logger)
+    with open(args.checkpoint, 'rb') as f:
+        engine = runtime.deserialize_cuda_engine(f.read())
+    context = engine.create_execution_context()
+    
+    
     device = args.device
     
     net = Generator()
+    
     net.load_state_dict(torch.load(args.checkpoint, map_location="cpu"))
     net.to(device).eval()
-    print(f"model loaded: {args.checkpoint}")
+    #print(f"model loaded: {args.checkpoint}")
     
     os.makedirs(args.output_dir, exist_ok=True)
 
@@ -50,7 +58,7 @@ def test(args):
             out = to_pil_image(out)
 
         out.save(os.path.join(args.output_dir, image_name))
-        print(f"image saved: {image_name}")
+        #print(f"image saved: {image_name}")
 
 
 if __name__ == '__main__':

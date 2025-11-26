@@ -2,9 +2,9 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 
-
+# Conv + Norm + LeakyRelu
 class ConvNormLReLU(nn.Sequential):
-    def __init__(self, in_ch, out_ch, kernel_size=3, stride=1, padding=1, pad_mode="reflect", groups=1, bias=False):
+    def __init__(self, in_ch, out_ch, kernel_size=3, stride=1, padding=1, pad_mode="zero", groups=1, bias=False):
         
         pad_layer = {
             "zero":    nn.ZeroPad2d,
@@ -25,14 +25,15 @@ class ConvNormLReLU(nn.Sequential):
 class InvertedResBlock(nn.Module):
     def __init__(self, in_ch, out_ch, expansion_ratio=2):
         super(InvertedResBlock, self).__init__()
-
         self.use_res_connect = in_ch == out_ch
+        # expansion_ratio 가 1일때는 bottleneck = in_ch
         bottleneck = int(round(in_ch*expansion_ratio))
         layers = []
         if expansion_ratio != 1:
+            # expansion_ratio 2가 들어오면, bottleneck 은 in_ch*2
             layers.append(ConvNormLReLU(in_ch, bottleneck, kernel_size=1, padding=0))
         
-        # dw
+        # dw , expansion_ration 안 시키면, in_ch in_ch / in_ch out_ch
         layers.append(ConvNormLReLU(bottleneck, bottleneck, groups=bottleneck, bias=True))
         # pw
         layers.append(nn.Conv2d(bottleneck, out_ch, kernel_size=1, padding=0, bias=False))
