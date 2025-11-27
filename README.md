@@ -23,6 +23,11 @@
 ### 7. inference
 - `$ python3 engine_test.py`
 
+### 8. result
+- <img src="./samples/compare/1.png" width="960"> &nbsp;
+ 
+- <img src="./samples/compare/2.png" width="960"> &nbsp;
+- <img src="./samples/compare/3.png" width="960"> &nbsp;
 ---
 ## PyTorch Implementation of [AnimeGANv2](https://github.com/TachibanaYoshino/AnimeGANv2)
 
