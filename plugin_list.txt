@@ -15,7 +15,7 @@
 [11/26/2025-09:59:38] [TRT] [V] Registered plugin creator - plugin::GenerateDetection_TRT version 1
 [11/26/2025-09:59:38] [TRT] [V] Registered plugin creator - plugin::GridAnchor_TRT version 1
 [11/26/2025-09:59:38] [TRT] [V] Registered plugin creator - plugin::GridAnchorRect_TRT version 1
-[11/26/2025-09:59:38] [TRT] [V] Registered plugin creator - plugin::GroupNorm version 1
+[11/26/2025-09:59:38] [TRT] [V] Registered lugin creator - plugin::GroupNorm version 1
 [11/26/2025-09:59:38] [TRT] [V] Registered plugin creator - plugin::InstanceNormalization_TRT version 1
 [11/26/2025-09:59:38] [TRT] [V] Registered plugin creator - plugin::InstanceNormalization_TRT version 2
 [11/26/2025-09:59:38] [TRT] [V] Registered plugin creator - plugin::LayerNorm version 1

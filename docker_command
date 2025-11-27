@@ -1,0 +1,6 @@
+1) base 이미지
+sudo docker run -it --rm --net=host --runtime nvidia -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix nvcr.io/nvidia/l4t-jetpack:r35.4.1
+
+2) 새로 만든 이미지
+sudo docker run -it --rm --net=host --runtime nvidia -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix \
+-v ~/work:/workspace imageforgan:v1
